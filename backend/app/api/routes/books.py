@@ -5,7 +5,6 @@ from app.services import books_service
 from app.core.constants import (
     DEFAULT_START_INDEX,
     DEFAULT_PAGE_SIZE,
-    GOOGLE_BOOKS_API_ADDRESS,
     MAX_PAGE_SIZE
 )
 
