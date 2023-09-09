@@ -1,10 +1,13 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI
-from api.api import router as api_router
 from fastapi.middleware.cors import CORSMiddleware
+from app.api.api import router as api_router
+
+load_dotenv()
 
 app = FastAPI()
 
-app.include_router(api_router, prefix="/api")
+app.include_router(api_router, prefix="/v1")
 
 # Set up CORS
 origins = [
