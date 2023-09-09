@@ -1,5 +1,5 @@
 from ..models.book_query import BookSearchQuery
-from .g_books_service import query_books_google_api
+from .g_books_service import query_books_google_api, query_book_google_api
 
 
 async def search_books(query: BookSearchQuery, start_index: int, page_size: int):
@@ -24,3 +24,10 @@ async def search_books(query: BookSearchQuery, start_index: int, page_size: int)
     google_query = google_query if google_query[0] != '&' else google_query[1:]
 
     return await query_books_google_api(google_query, start_index, page_size)
+
+
+async def search_book_by_id(bookId: str):
+    """
+    Search the full information of one book by its id.
+    """
+    return await query_book_google_api(bookId)

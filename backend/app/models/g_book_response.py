@@ -53,4 +53,3 @@ class GoogleBookResponse(BaseModel):
 class GoogleBooksResponse(BaseModel):
     totalItems: int
     items: List[GoogleBookResponse]
-

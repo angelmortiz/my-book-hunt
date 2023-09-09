@@ -11,7 +11,7 @@ from app.core.constants import (
 router = APIRouter()
 
 
-@router.get("")
+@router.get("/")
 async def search_books(
     search: str = Query(None, description="General search query for books"),
     title: str = Query(None, description="Search by book title"),
@@ -27,3 +27,7 @@ async def search_books(
 
     # Use the book service function to get the results
     return await books_service.search_books(book_query, startIndex, pageSize)
+
+@router.get("/{bookId}")
+async def search_book_by_id(bookId: str):
+    return await books_service.search_book_by_id(bookId)
