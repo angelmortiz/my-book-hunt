@@ -43,14 +43,14 @@ class SaleInfo(BaseModel):
     buyLink: Optional[str] = None
 
 
-class GoogleBooks(BaseModel):
+class GoogleBookResponse(BaseModel):
     id: str
     selfLink: str
     volumeInfo: VolumeInfo
     saleInfo: Optional[SaleInfo] = None
 
 
-class GoogleBookResponse(BaseModel):
+class GoogleBooksResponse(BaseModel):
     totalItems: int
-    items: List[GoogleBooks]
+    items: List[GoogleBookResponse]
 
