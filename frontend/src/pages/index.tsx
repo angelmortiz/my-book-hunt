@@ -7,6 +7,7 @@ import Grid from "@/components/Grid";
 import {searchBooks} from "@/api/books";
 import {BookPreviewResponse, BookPreviewFullResponse} from "@/types/books_preview";
 import Pagination from "@/components/pagination";
+import Spinner from "@/components/Spinner";
 
 
 const Home: NextPage = () => {
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
     const [totalPages, setTotalPages] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentQuery, setCurrentQuery] = useState<string>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const pageSize = 20;
 
     const handleSearch = (query: string): void => {
@@ -26,6 +28,7 @@ const Home: NextPage = () => {
             return;
         }
 
+        setIsLoading(true);
         const startIndex = (currentPage - 1) * pageSize;
         setCurrentQuery(query);
         searchBooks(query, startIndex)
@@ -40,6 +43,9 @@ const Home: NextPage = () => {
             .catch(error => {
                 console.error('Failed to fetch books:', error);
                 // TODO: Handle the error in the UI (show the error in a notification)
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     };
 
@@ -75,10 +81,16 @@ const Home: NextPage = () => {
                         <SearchBar onSearch={handleSearch}/>
                         {totalBooks > 0 && <p className="-mt-2 px-6 text-sm">Total books found: {totalBooks}</p>}
                     </div>
-                    {/*TODO: Add spinning gif while fetching books from backend.*/}
-                    <Grid books={books}/>
-                    <Pagination totalPages={totalPages} currentPage={currentPage}
-                                onNextPage={goToNextPage} onPreviousPage={goToPreviousPage}/>
+
+                    {isLoading ?
+                        <Spinner/> :
+                        <>
+                            <Grid books={books}/>
+                            <Pagination totalPages={totalPages} currentPage={currentPage}
+                                        onNextPage={goToNextPage} onPreviousPage={goToPreviousPage}/>
+                        </>
+                    }
+
                 </div>
 
             </div>

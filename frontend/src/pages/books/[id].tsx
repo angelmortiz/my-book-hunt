@@ -1,28 +1,22 @@
+import type { GetServerSideProps } from 'next'
 import {useRouter} from 'next/router';
-import {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {searchBookById} from "@/api/books";
 import {BookFullResponse} from "@/types/books_full_info";
+import Spinner from "@/components/Spinner";
 
-const BookDetailPage = () => {
+type PageDetailProps = {
+    book: BookFullResponse;
+}
+
+const BookDetailPage: React.FC<PageDetailProps> = ({book}) => {
     const router = useRouter();
     const {id} = router.query;
-    const [book, setBook] = useState<BookFullResponse>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    useEffect(() => {
-        if (!id) return;
-
-        const searchId: string = (typeof id === 'string') ? id : id[0];
-        searchBookById(searchId)
-            .then((response: BookFullResponse) => {
-                if (response) {
-                    setBook(response);
-                }
-            })
-            .catch(error => {
-                console.error(`Failed to fetch book with id '${id}':`, error);
-                // TODO: Handle the error in the UI (show the error in a notification)
-            });
-    }, [id]);
+    if (!book) {
+        return <Spinner/>;
+    }
 
     return (
         <div className="min-h-screen bg-stone-100 p-6">
@@ -81,3 +75,15 @@ const BookDetailPage = () => {
 };
 
 export default BookDetailPage;
+
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+    const id: string = context.params.id;
+
+    try {
+        const book: BookFullResponse = await searchBookById(id);
+        return {props: {book}};
+    } catch (error) {
+        console.error(`Failed to fetch book with id '${id}':`, error);
+        return {props: {book: null}};
+    }
+}
