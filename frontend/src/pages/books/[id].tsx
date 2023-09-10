@@ -35,10 +35,10 @@ const BookDetailPage: React.FC<PageDetailProps> = ({book}) => {
                         <h1 className="mb-2 text-3xl font-bold text-cyan-700">{book?.title}</h1>
                         {book?.subtitle &&
                             <h2 className="mb-4 text-xl text-stone-600">{book?.subtitle}</h2>}
-                        <p className="mb-4 text-stone-600">
+                        <p className="mt-4 mb-2 text-stone-600">
                             <strong>Authors:</strong> {book?.authors.join(", ")}</p>
-                        <p className="mb-4 text-stone-600"><strong>Publisher:</strong> {book?.publisher}</p>
-                        <p className="mb-4 text-stone-600"><strong>Published
+                        <p className="mb-2 text-stone-600"><strong>Publisher:</strong> {book?.publisher}</p>
+                        <p className="mb-2 text-stone-600"><strong>Published
                             Year:</strong> {book?.publishedYear}</p>
                         <p className="mb-4 text-stone-600"><strong>Page Count:</strong> {book?.pageCount}
                         </p>
@@ -47,13 +47,13 @@ const BookDetailPage: React.FC<PageDetailProps> = ({book}) => {
 
                         {/*ISBNs*/}
                         {book?.ISBNs?.map((ISBN, index) => {
-                            return <p key={`isbn_${index}`} className="mb-4 text-stone-600">
+                            return <p key={`isbn_${index}`} className="mb-2 text-stone-600">
                                 <strong>ISBN {index + 1}: </strong>
                                 <span>{ISBN}</span>
                             </p>
 
                         })}
-                        <p className="mb-4 text-stone-600">
+                        <p className="mt-4 mb-4 text-stone-600">
                             <strong>Categories:</strong> {book?.categories?.join(", ")}</p>
                         <p className="mb-4 text-stone-600"><strong>Rating:</strong> {book?.averageRating}
                         </p>
