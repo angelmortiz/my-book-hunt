@@ -1,4 +1,6 @@
 from ..models.book_query import BookSearchQuery
+from ..models.book_full_dto import BookFullDTO
+from ..models.book_preview_dto import BooksPreviewDTO
 from .g_books_service import query_books_google_api, query_book_google_api
 
 
@@ -23,11 +25,13 @@ async def search_books(query: BookSearchQuery, start_index: int, page_size: int)
     # Removes the initial '&' if a query.search was not provided
     google_query = google_query if google_query[0] != '&' else google_query[1:]
 
-    return await query_books_google_api(google_query, start_index, page_size)
+    g_google_books = await query_books_google_api(google_query, start_index, page_size)
+    return BooksPreviewDTO.from_google_response(g_google_books)
 
 
 async def search_book_by_id(bookId: str):
     """
     Search the full information of one book by its id.
     """
-    return await query_book_google_api(bookId)
+    g_google_book = await query_book_google_api(bookId)
+    return BookFullDTO.from_google_response(g_google_book)
