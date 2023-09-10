@@ -5,7 +5,7 @@ import {useState} from "react";
 import SearchBar from '../components/SearchBar';
 import Grid from "@/components/Grid";
 import {searchBooks} from "@/api/books";
-import {GoogleBookLiteResponse, GoogleBooksLiteResponse} from "@/types/books";
+import {GoogleBookLiteResponse, GoogleBooksLiteResponse} from "@/types/books_preview";
 
 const Home: NextPage = () => {
     const [books, setBooks] = useState<GoogleBookLiteResponse[]>([]);
