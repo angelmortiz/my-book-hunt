@@ -16,8 +16,8 @@ class IndustryIdentifier(BaseModel):
 class VolumeInfo(BaseModel):
     title: str
     subtitle: Optional[str] = None
-    authors: List[str]
-    publisher: str
+    authors: Optional[List[str]] = None
+    publisher: Optional[str] = None
     publishedDate: Optional[str] = None
     description: Optional[str] = None
     industryIdentifiers: Optional[List[IndustryIdentifier]] = None

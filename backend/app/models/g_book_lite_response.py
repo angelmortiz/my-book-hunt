@@ -8,7 +8,7 @@ class ImageLinks(BaseModel):
 
 class VolumeInfo(BaseModel):
     title: str
-    authors: List[str]
+    authors: Optional[List[str]] = None
     publishedDate: Optional[str] = None
     description: Optional[str] = None
     categories: Optional[List[str]] = None

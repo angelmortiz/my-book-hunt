@@ -10,15 +10,15 @@ class BookFullDTO(BaseModel):
     id: str
     title: str
     subtitle: Optional[str] = None
-    authors: List[str]
-    publisher: str
+    authors: Optional[List[str]] = None
+    publisher: Optional[str] = None
     publishedYear: Optional[int] = None
     description: Optional[str] = None
     ISBNs: Optional[list[str]] = None
     pageCount: Optional[int] = None
     categories: Optional[List[str]] = None
     averageRating: Optional[float] = None
-    image: str
+    image: Optional[str] = None
     previewLink: Optional[str] = None
     infoLink: Optional[str] = None
     buyLink: Optional[str] = None
@@ -31,7 +31,7 @@ class BookFullDTO(BaseModel):
             id=google_book.id,
             title=google_book.volumeInfo.title,
             subtitle=google_book.volumeInfo.subtitle,
-            authors=google_book.volumeInfo.authors,
+            authors=google_book.volumeInfo.authors if google_book.volumeInfo.authors else None,
             publisher=google_book.volumeInfo.publisher,
             publishedYear=datetime.strptime(google_book.volumeInfo.publishedDate, '%Y-%m-%d').year
                             if google_book.volumeInfo.publishedDate else None,

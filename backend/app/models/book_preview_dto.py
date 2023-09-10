@@ -9,7 +9,7 @@ class BookPreviewDTO(BaseModel):
     id: str
     selfLink: Optional[str] = None
     title: Optional[str] = None
-    authors: List[str]
+    authors: Optional[List[str]] = None
     publishedYear: Optional[int] = None
     categories: Optional[List[str]] = None
     averageRating: Optional[float] = None
@@ -32,7 +32,7 @@ class BookPreviewDTO(BaseModel):
             id=google_book.id,
             selfLink=google_book.selfLink,
             title=google_book.volumeInfo.title,
-            authors=google_book.volumeInfo.authors,
+            authors=google_book.volumeInfo.authors if google_book.volumeInfo.authors else None,
             publishedYear=published_year,
             categories=google_book.volumeInfo.categories,
             averageRating=google_book.volumeInfo.averageRating,
