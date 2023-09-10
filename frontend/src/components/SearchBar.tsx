@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
-import { HiMagnifyingGlass } from 'react-icons/hi2'
+import {HiMagnifyingGlass} from 'react-icons/hi2'
 
 const SearchBar: React.FC<{ onSearch: (query: string) => void }> = ({onSearch}) => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    const handleSearch = () => {
-        onSearch(searchTerm);
-    };
+    // Handle 'Enter' press on the keyboard after typing
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+        if (e.key === 'Enter') {
+            onSearch(searchTerm);
+        }
+    }
 
     return (
         <div className="flex items-center justify-center p-4">
@@ -16,9 +19,10 @@ const SearchBar: React.FC<{ onSearch: (query: string) => void }> = ({onSearch}) 
                 placeholder="Search by titles, authors, ISBNs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleKeyPress}
             />
-            <button className="rounded-full bg-cyan-600 px-3 py-3 text-stone-100" onClick={handleSearch}>
-                <HiMagnifyingGlass />
+            <button className="rounded-full bg-cyan-600 px-3 py-3 text-stone-100" onClick={() => onSearch(searchTerm)}>
+                <HiMagnifyingGlass/>
             </button>
         </div>
     );

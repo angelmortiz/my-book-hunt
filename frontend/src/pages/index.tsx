@@ -1,12 +1,35 @@
 import type {NextPage} from 'next';
-import SearchBar from '../components/SearchBar';
 import Head from 'next/head';
 import Image from 'next/image'
+import {useState} from "react";
+import SearchBar from '../components/SearchBar';
+import Grid from "@/components/Grid";
+import {searchBooks} from "@/api/books";
+import {GoogleBookLiteResponse, GoogleBooksLiteResponse} from "@/types/books";
 
 const Home: NextPage = () => {
-    const handleSearch = (query: string) => {
-        console.log('Searching for:', query);
-        // TODO:API call here later
+    const [books, setBooks] = useState<GoogleBookLiteResponse[]>([]);
+    const [totalBooks, setTotalBooks] = useState<number>();
+
+    const handleSearch = (query: string): void => {
+        // Reset values if query is empty
+        if (!query) {
+            setBooks([]);
+            setTotalBooks(undefined);
+            return;
+        }
+
+        searchBooks(query)
+            .then((response: GoogleBooksLiteResponse) => {
+                if (response) {
+                    setTotalBooks(response.totalItems);
+                    setBooks(response.items);
+                }
+            })
+            .catch(error => {
+                console.error('Failed to fetch books:', error);
+                // TODO: Handle the error in the UI (show the error in a notification)
+            });
     };
 
     return (
@@ -21,8 +44,12 @@ const Home: NextPage = () => {
                                className="h-[50px] w-[50px]" alt="My Book Hunt logo"/>
                         <h1 className="my-6 text-center text-3xl">My Book Hunt</h1>
                     </div>
-                    <SearchBar onSearch={handleSearch}/>
-                    {/* TODO: Search results here  */}
+                    <div className="flex flex-col text-cyan-950">
+                        <SearchBar onSearch={handleSearch}/>
+                        {totalBooks && <p className="px-6 -mt-2 text-sm">Total books found: {totalBooks}</p>}
+                    </div>
+                    {/*TODO: Add spinning gif while fetching books from backend.*/}
+                    <Grid books={books}/>
                 </div>
 
             </div>
