@@ -10,17 +10,17 @@ async def search_books(query: BookSearchQuery, start_index: int, page_size: int)
     """
     google_query = ""
     if query.search:
-        google_query += query.search.replace(" ", "+")
+        google_query += query.search
     if query.title:
-        google_query += f'&intitle:{query.title.replace(" ", "+")}'
+        google_query += f'&intitle:{query.title}'
     if query.author:
-        google_query += f'&inauthor:{query.author.replace(" ", "+")}'
+        google_query += f'&inauthor:{query.author}'
     if query.publisher:
-        google_query += f'&inpublisher:{query.publisher.replace(" ", "+")}'
+        google_query += f'&inpublisher:{query.publisher}'
     if query.category:
-        google_query += f'&subject:{query.category.replace(" ", "+")}'
+        google_query += f'&subject:{query.category}'
     if query.isbn:
-        google_query += f'&isbn:{query.isbn.replace(" ", "+")}'
+        google_query += f'&isbn:{query.isbn}'
 
     # Removes the initial '&' if a query.search was not provided
     google_query = google_query if google_query[0] != '&' else google_query[1:]

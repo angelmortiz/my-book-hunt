@@ -20,7 +20,7 @@ class BookPreviewDTO(BaseModel):
     @classmethod
     def map_items(cls, google_book: GoogleBookLiteResponse) -> 'BookPreviewDTO':
         published_year = None
-        print(google_book.volumeInfo.publishedDate)
+
         if google_book.volumeInfo.publishedDate:
             date_str = google_book.volumeInfo.publishedDate
             if "-" in date_str:  # Check if the date is in the format '%Y-%m-%d'
