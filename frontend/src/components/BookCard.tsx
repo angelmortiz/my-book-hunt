@@ -1,13 +1,16 @@
 import React from 'react';
 import {BookPreviewResponse} from "@/types/books_preview";
 import {useRouter} from "next/router";
+import Image from "next/image";
+
+const alternativeImage = "https://vectorportal.com/storage/tLDDoIwxfUATlorcYCF77rN1Idn0cnGhQPU5uVcL.jpg";
 
 type CardProps = {
     book: BookPreviewResponse;
 }
 
 const BookCard: React.FC<CardProps> = (bookInfo) => {
-    const { book } = bookInfo;
+    const {book} = bookInfo;
     const router = useRouter();
     const redirectToBookDetails = (): void => {
         if (!book.id) {
@@ -24,7 +27,9 @@ const BookCard: React.FC<CardProps> = (bookInfo) => {
     return (
         <div className="m-2 flex flex-col justify-between rounded-2xl border bg-stone-50 p-4 shadow-md text-al">
             <div className="mx-auto">
-                <img src={book?.thumbnail} alt={book?.title} className="mb-4 h-52 w-auto rounded-md object-cover"/>
+                <Image src={book?.thumbnail || alternativeImage} alt={book?.title}
+                       width="0" height="0" sizes="100vw"
+                       className="mb-4 h-52 w-auto rounded-md object-cover"/>
             </div>
             <div className="flex h-48 flex-col justify-between">
                 <h2 className="text-center text-lg font-bold leading-tight text-cyan-700">{shortenTitle()}</h2>
