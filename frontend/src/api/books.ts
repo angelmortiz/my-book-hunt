@@ -1,12 +1,12 @@
 import axios, {AxiosResponse} from 'axios';
-import {GoogleBooksLiteResponse} from "@/types/books_preview";
-import {GoogleBookFullResponse} from "@/types/books_full_info";
+import {BookPreviewFullResponse} from "@/types/books_preview";
+import {BookFullResponse} from "@/types/books_full_info";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_ADDRESS + '/v1/books';
 
-export const searchBooks = async (query: string): Promise<GoogleBooksLiteResponse> => {
+export const searchBooks = async (query: string): Promise<BookPreviewFullResponse> => {
     try {
-        const response: AxiosResponse<GoogleBooksLiteResponse> = await axios.get(`${BASE_URL}/`, {
+        const response: AxiosResponse<BookPreviewFullResponse> = await axios.get(`${BASE_URL}/`, {
             params: {
                 search: query
             }
@@ -19,9 +19,9 @@ export const searchBooks = async (query: string): Promise<GoogleBooksLiteRespons
     }
 };
 
-export const searchBookById = async (id: string): Promise<GoogleBookFullResponse> => {
+export const searchBookById = async (id: string): Promise<BookFullResponse> => {
     try {
-        const response: AxiosResponse<GoogleBookFullResponse> = await axios.get(`${BASE_URL}/${id}`);
+        const response: AxiosResponse<BookFullResponse> = await axios.get(`${BASE_URL}/${id}`);
         return response.data;
     } catch (error) {
         console.error(`An error occurred while fetching full book information: ${error}`);

@@ -1,47 +1,19 @@
-export type ImageLinks = {
-    thumbnail: string;
-    small?: string;
-    medium?: string;
-}
-
-export type IndustryIdentifier = {
-    type: string;
-    identifier: string;
-}
-
-export type VolumeInfo = {
+export type BookFullResponse = {
+    id: string;
     title: string;
     subtitle?: string;
     authors: string[];
     publisher: string;
-    publishedDate?: string;
+    publishedYear?: number;
     description?: string;
-    industryIdentifiers?: IndustryIdentifier[];
+    ISBNs?: string[];
     pageCount?: number;
     categories?: string[];
     averageRating?: number;
-    ratingsCount?: number;
-    contentVersion?: string;
-    imageLinks: ImageLinks;
-    language?: string;
+    image: string;
     previewLink?: string;
     infoLink?: string;
-}
-
-export type RetailPrice = {
-    amount: number;
-    currencyCode?: string;
-}
-
-export type SaleInfo = {
-    saleability?: string;
-    retailPrice?: RetailPrice;
     buyLink?: string;
-}
-
-export type GoogleBookFullResponse = {
-    id: string;
-    selfLink: string;
-    volumeInfo: VolumeInfo;
-    saleInfo?: SaleInfo;
+    price?: number;
+    currencyCode?: string;
 }

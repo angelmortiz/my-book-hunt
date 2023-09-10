@@ -1,9 +1,9 @@
 import React from 'react';
 import BookCard from './BookCard';
-import {GoogleBookLiteResponse} from "@/types/books_preview";
+import {BookPreviewResponse} from "@/types/books_preview";
 
 interface GridProps {
-    books: GoogleBookLiteResponse[];
+    books: BookPreviewResponse[];
 }
 
 const Grid: React.FC<GridProps> = ({books}) => {

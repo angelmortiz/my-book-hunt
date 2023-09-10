@@ -1,26 +1,16 @@
-// TODO: Flatten these types on the backend to only have one level
-export type ImageLinks = {
-    thumbnail: string;
-}
-
-export type VolumeInfo = {
+export type BookPreviewResponse = {
+    id: string;
+    selfLink?: string;
     title: string;
     authors: string[];
-    publishedDate?: string;
-    description?: string;
+    publishedYear?: number;
     categories?: string[];
     averageRating?: number;
-    imageLinks: ImageLinks;
+    thumbnail?: string;
     infoLink?: string;
 }
 
-export type GoogleBookLiteResponse = {
-    id: string;
-    selfLink: string;
-    volumeInfo: VolumeInfo;
-}
-
-export type GoogleBooksLiteResponse = {
-    totalItems: number;
-    items: GoogleBookLiteResponse[];
+export type BookPreviewFullResponse = {
+    totalItems?: number;
+    items: BookPreviewResponse[];
 }

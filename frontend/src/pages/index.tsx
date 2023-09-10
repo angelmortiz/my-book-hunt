@@ -5,10 +5,10 @@ import {useState} from "react";
 import SearchBar from '../components/SearchBar';
 import Grid from "@/components/Grid";
 import {searchBooks} from "@/api/books";
-import {GoogleBookLiteResponse, GoogleBooksLiteResponse} from "@/types/books_preview";
+import {BookPreviewResponse, BookPreviewFullResponse} from "@/types/books_preview";
 
 const Home: NextPage = () => {
-    const [books, setBooks] = useState<GoogleBookLiteResponse[]>([]);
+    const [books, setBooks] = useState<BookPreviewResponse[]>([]);
     const [totalBooks, setTotalBooks] = useState<number>();
 
     const handleSearch = (query: string): void => {
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         }
 
         searchBooks(query)
-            .then((response: GoogleBooksLiteResponse) => {
+            .then((response: BookPreviewFullResponse) => {
                 if (response) {
                     setTotalBooks(response.totalItems);
                     setBooks(response.items);
