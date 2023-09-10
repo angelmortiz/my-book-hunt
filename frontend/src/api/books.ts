@@ -4,11 +4,12 @@ import {BookFullResponse} from "@/types/books_full_info";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_ADDRESS + '/v1/books';
 
-export const searchBooks = async (query: string): Promise<BookPreviewFullResponse> => {
+export const searchBooks = async (query: string, startIndex: number = 0): Promise<BookPreviewFullResponse> => {
     try {
         const response: AxiosResponse<BookPreviewFullResponse> = await axios.get(`${BASE_URL}/`, {
             params: {
-                search: query
+                search: query,
+                startIndex
             }
         });
 

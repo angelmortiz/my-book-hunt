@@ -1,28 +1,39 @@
 import type {NextPage} from 'next';
 import Head from 'next/head';
 import Image from 'next/image'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import SearchBar from '../components/SearchBar';
 import Grid from "@/components/Grid";
 import {searchBooks} from "@/api/books";
 import {BookPreviewResponse, BookPreviewFullResponse} from "@/types/books_preview";
+import Pagination from "@/components/pagination";
+
 
 const Home: NextPage = () => {
     const [books, setBooks] = useState<BookPreviewResponse[]>([]);
-    const [totalBooks, setTotalBooks] = useState<number>();
+    const [totalBooks, setTotalBooks] = useState<number>(0);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentQuery, setCurrentQuery] = useState<string>();
+    const pageSize = 20;
 
     const handleSearch = (query: string): void => {
         // Reset values if query is empty
         if (!query) {
+            setCurrentQuery(undefined);
             setBooks([]);
-            setTotalBooks(undefined);
+            setTotalBooks(0);
             return;
         }
 
-        searchBooks(query)
+        const startIndex = (currentPage - 1) * pageSize;
+        setCurrentQuery(query);
+        searchBooks(query, startIndex)
             .then((response: BookPreviewFullResponse) => {
                 if (response) {
-                    setTotalBooks(response.totalItems);
+                    console.log(response.totalItems);
+                    setTotalBooks(response.totalItems || 0);
+                    setTotalPages(Math.ceil((response.totalItems || 0) / pageSize));
                     setBooks(response.items);
                 }
             })
@@ -30,6 +41,22 @@ const Home: NextPage = () => {
                 console.error('Failed to fetch books:', error);
                 // TODO: Handle the error in the UI (show the error in a notification)
             });
+    };
+
+    useEffect(() => {
+        handleSearch(currentQuery || '');
+    }, [currentPage]);
+
+    const goToPreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(prev => prev - 1);
+        }
+    };
+
+    const goToNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(prev => prev + 1);
+        }
     };
 
     return (
@@ -46,10 +73,12 @@ const Home: NextPage = () => {
                     </div>
                     <div className="flex flex-col text-cyan-950">
                         <SearchBar onSearch={handleSearch}/>
-                        {totalBooks && <p className="px-6 -mt-2 text-sm">Total books found: {totalBooks}</p>}
+                        {totalBooks > 0 && <p className="-mt-2 px-6 text-sm">Total books found: {totalBooks}</p>}
                     </div>
                     {/*TODO: Add spinning gif while fetching books from backend.*/}
                     <Grid books={books}/>
+                    <Pagination totalPages={totalPages} currentPage={currentPage}
+                                onNextPage={goToNextPage} onPreviousPage={goToPreviousPage}/>
                 </div>
 
             </div>

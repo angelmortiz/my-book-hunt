@@ -2,7 +2,12 @@ import React from 'react';
 import {BookPreviewResponse} from "@/types/books_preview";
 import {useRouter} from "next/router";
 
-const BookCard: React.FC<BookPreviewResponse> = (book) => {
+type CardProps = {
+    book: BookPreviewResponse;
+}
+
+const BookCard: React.FC<CardProps> = (bookInfo) => {
+    const { book } = bookInfo;
     const router = useRouter();
     const redirectToBookDetails = (): void => {
         if (!book.id) {
@@ -25,7 +30,7 @@ const BookCard: React.FC<BookPreviewResponse> = (book) => {
                 <h2 className="text-center text-lg font-bold leading-tight text-cyan-700">{shortenTitle()}</h2>
                 <div className="px-2">
                     {book?.authors && book?.authors[0] &&
-                        <p className="text-stone-600"><strong>Author:</strong> {book?.authors[0]}</p>}
+                        <p className="text-stone-600"><strong>Author:</strong> {book?.authors}</p>}
                     {book?.publishedYear &&
                         <p className="text-stone-600"><strong>Year:</strong> {book?.publishedYear}</p>}
                     {book?.categories && book?.categories[0] &&
