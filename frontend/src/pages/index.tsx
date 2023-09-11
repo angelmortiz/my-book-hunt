@@ -1,6 +1,5 @@
 import type {NextPage} from 'next';
 import Head from 'next/head';
-import Image from 'next/image'
 import {useEffect, useState} from "react";
 import SearchBar from '../components/SearchBar';
 import Grid from "@/components/Grid";
@@ -73,8 +72,6 @@ const Home: NextPage = () => {
             <div className="min-h-screen bg-stone-100 text-stone-600">
                 <div className="container mx-auto flex flex-col gap-2 px-4 py-10">
                     <div className="mx-auto flex items-center gap-5">
-                        {/*<Image src="/mbh_logo_50px.png" width="0" height="0" sizes="100vw"*/}
-                        {/*       className="h-[50px] w-[50px]" alt="My Book Hunt logo"/>*/}
                         <img src="/mbh_logo_50px.png"
                                className="h-[50px] w-[50px]" alt="My Book Hunt logo"/>
                         <h1 className="my-6 text-center text-3xl">My Book Hunt</h1>

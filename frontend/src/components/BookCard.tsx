@@ -27,9 +27,8 @@ const BookCard: React.FC<CardProps> = (bookInfo) => {
     return (
         <div className="m-2 flex flex-col justify-between rounded-2xl border bg-stone-50 p-4 shadow-md text-al">
             <div className="mx-auto">
-                <Image src={book?.thumbnail || alternativeImage} alt={book?.title}
-                       width="0" height="0" sizes="100vw"
-                       className="mb-4 h-52 w-auto rounded-md object-cover"/>
+                <img src={book?.thumbnail || alternativeImage} alt={book?.title}
+                     className="mb-4 h-52 w-auto rounded-md object-cover"/>
             </div>
             <div className="flex h-48 flex-col justify-between">
                 <h2 className="text-center text-lg font-bold leading-tight text-cyan-700">{shortenTitle()}</h2>

@@ -4,7 +4,6 @@ import React, {useState} from "react";
 import {searchBookById} from "@/api/books";
 import {BookFullResponse} from "@/types/books_full_info";
 import Spinner from "@/components/Spinner";
-import Image from "next/image";
 
 type PageDetailProps = {
     book: BookFullResponse;
@@ -25,9 +24,8 @@ const BookDetailPage: React.FC<PageDetailProps> = ({book}) => {
                 <div className="flex flex-col md:flex-row">
                     {/* Left side with Image */}
                     <div className="p-4 md:w-1/3">
-                        <Image src={book?.image} alt={book?.title}
-                               width="0" height="0" sizes="100vw"
-                               className="mx-auto h-fit w-fit rounded shadow-md min-h-[300px] min-w-[200px]"/>
+                        <img src={book?.image} alt={book?.title}
+                             className="mx-auto h-fit w-fit rounded shadow-md min-h-[300px] min-w-[200px]"/>
                     </div>
 
                     {/* Right side with Details */}
