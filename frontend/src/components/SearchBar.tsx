@@ -8,9 +8,8 @@ type SearchBarProps = {
 
 const SearchBar: React.FC<SearchBarProps> = ({onSearch, query}) => {
     const [searchTerm, setSearchTerm] = useState(query || "");
-    console.log("outside query: ", query);
+
     useEffect(() => {
-        // console.log("inside query: ", query);
         setSearchTerm(query || "");
     }, [query]);
 
