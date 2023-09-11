@@ -26,7 +26,8 @@ async def search_books(
     book_query = BookSearchQuery(search, title, author, publisher, category, isbn)
 
     # Use the book service function to get the results
-    return await books_service.search_books(book_query, startIndex, pageSize)
+    response = await books_service.search_books(book_query, startIndex, pageSize)
+    return response
 
 
 @router.get("/{bookId}")

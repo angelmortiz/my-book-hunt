@@ -12,7 +12,8 @@ from app.core.constants import (
 )
 
 
-async def query_books_google_api(query: str, start_index: int = DEFAULT_START_INDEX, page_size: int = DEFAULT_PAGE_SIZE):
+async def query_books_google_api(query: str, start_index: int = DEFAULT_START_INDEX,
+                                 page_size: int = DEFAULT_PAGE_SIZE):
     """
     Query books on Google Books API using the query parameters provided.
     """
