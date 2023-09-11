@@ -1,8 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {HiMagnifyingGlass} from 'react-icons/hi2'
 
-const SearchBar: React.FC<{ onSearch: (query: string) => void }> = ({onSearch}) => {
-    const [searchTerm, setSearchTerm] = useState('');
+type SearchBarProps = {
+    onSearch: (query: string) => void,
+    query: string | undefined
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({onSearch, query}) => {
+    const [searchTerm, setSearchTerm] = useState(query || "");
+    console.log("outside query: ", query);
+    useEffect(() => {
+        // console.log("inside query: ", query);
+        setSearchTerm(query || "");
+    }, [query]);
 
     // Handle 'Enter' press on the keyboard after typing
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
