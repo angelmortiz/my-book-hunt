@@ -12,6 +12,7 @@ app.include_router(api_router, prefix="/v1")
 # Set up CORS
 origins = [
     "http://localhost:3000",  # Allow requests from your frontend during local development
+    "*"  # FIXME: Remove wildcard after finishing all testings
 ]
 
 app.add_middleware(
