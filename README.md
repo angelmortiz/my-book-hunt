@@ -5,7 +5,7 @@
 
 ### Project Structure
 > /backend - Contains the FastAPI backend application.\
-> /frontend - Houses the frontend application developed using Next.js and Tailwind CSS.
+> /frontend - Contains the frontend application developed using Next.js and Tailwind CSS.
 
 ## Repository Information
 GitHub Repository: My Book Hunt
@@ -76,12 +76,12 @@ npm run dev
 ### Frontend (Next.js on AWS Amplify)
 The frontend application was deployed using AWS Amplify. AWS Amplify makes it easy to create, configure, and implement scalable mobile and web apps powered by AWS. This ensures a globally available, fast-loading user interface for "My Book Hunt".
 
->Beta Version: [app.mybookhunt.com](app.mybookhunt.com)
+>Beta Version: [app.mybookhunt.com](https://app.mybookhunt.com)
 
 ### Backend (FastAPI on AWS ECS Fargate)
 The backend API for "My Book Hunt" was deployed using AWS's Elastic Container Service (ECS) with the Fargate launch type. This allows for serverless container execution, ensuring seamless scalability and management.
 
->API Base URL: [api.mybookhunt.com](api.mybookhunt.com)
+>API Base URL: [api.mybookhunt.com](https://api.mybookhunt.com)
 
 
 ## Conclusion
