@@ -31,7 +31,8 @@ const SearchBar: React.FC<SearchBarProps> = ({onSearch, query}) => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={handleKeyPress}
             />
-            <button className="rounded-full bg-cyan-600 px-3 py-3 text-stone-100 hover:bg-cyan-500" onClick={() => onSearch(searchTerm)}>
+            <button className="rounded-full bg-cyan-600 px-3 py-3 text-stone-100 hover:bg-stone-600"
+                    onClick={() => onSearch(searchTerm)}>
                 <HiMagnifyingGlass/>
             </button>
         </div>

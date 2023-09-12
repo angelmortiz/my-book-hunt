@@ -20,15 +20,16 @@ const Home: NextPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const pageSize = 20;
 
-    // Allows page to automatically pulls go back to previous stage after the user has navigated to another page
+    // Allows page to automatically adjust back to previous status before the user navigated to another page.
+    // Example: Sets url to previous search parameters and page #. Also sets the value in the bar search
     useEffect(() => {
         if (!router.isReady || !router.query.search) return;
 
         setCurrentQuery(router.query.search as string);
         const page = Number(router?.query?.page || 1);
         setCurrentPage(page);
-
-        handleSearch(router.query.search as string);
+        const searchVal= router.query.search as string;
+        handleSearch(searchVal);
     }, [router.isReady]);
 
 
@@ -69,7 +70,8 @@ const Home: NextPage = () => {
     };
 
     useEffect(() => {
-        handleSearch(currentQuery || '');
+        if (!currentQuery) return;
+        handleSearch(currentQuery);
     }, [currentPage]);
 
     const goToPreviousPage = () => {
@@ -91,10 +93,10 @@ const Home: NextPage = () => {
             </Head>
             <div className="min-h-screen bg-stone-100 text-stone-600">
                 <div className="container mx-auto flex flex-col gap-2 px-4 py-6 sm:py-8 md:py-10">
-                    <div className="mx-auto flex items-center gap-5">
-                        <img src="/mbh_logo_50px.png"
+                    <div className="mx-auto my-2 flex flex-col items-center gap-2 sm:my-4 sm:flex-row sm:gap-5 md:my-6">
+                        <img src="/mbh_logo_medium.png"
                              className="h-[50px] w-[50px]" alt="My Book Hunt logo"/>
-                        <h1 className="my-6 text-center text-3xl sm:text-4xl font-extrabold tracking-wider uppercase
+                        <h1 className="text-center text-3xl sm:text-4xl font-extrabold tracking-wider uppercase
                                        bg-clip-text text-transparent bg-gradient-to-r from-cyan-700
                                        to-stone-600 border-b">
                             My Book Hunt
