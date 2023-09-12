@@ -25,7 +25,8 @@ const BookCard: React.FC<CardProps> = (bookInfo) => {
     }
 
     return (
-        <div className="m-2 flex flex-col justify-between rounded-2xl border bg-stone-50 p-4 shadow-md text-al">
+        <div className="m-2 flex transform flex-col justify-between rounded-2xl border bg-stone-50 p-4
+                        shadow-md transition-transform duration-300 text-al hover:scale-105">
             <div className="mx-auto">
                 <img src={book?.thumbnail || alternativeImage} alt={book?.title}
                      className="mb-4 h-52 w-auto rounded-md object-cover"/>

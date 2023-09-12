@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import {searchBookById} from "@/api/books";
 import {BookFullResponse} from "@/types/books_full_info";
 import Spinner from "@/components/Spinner";
+import {HiArrowLongLeft} from "react-icons/hi2";
 
 type PageDetailProps = {
     book: BookFullResponse;
@@ -19,22 +20,34 @@ const BookDetailPage: React.FC<PageDetailProps> = ({book}) => {
     }
 
     return (
-        <div className="min-h-screen bg-stone-100 p-6">
-            <div className="mx-auto max-w-5xl">
+        <div className="min-h-screen bg-stone-100 p-6 sm:p-8">
+
+            <div className="mx-auto max-w-5xl rounded-lg bg-stone-50 shadow-md sm:p-6 lg:p-8">
+                <button onClick={() => router.back()} className="p-2">
+                    <strong className="flex items-center text-xl text-cyan-700">
+                        <HiArrowLongLeft className="mr-1 h-5 w-5 font-bold" aria-hidden="true"/>
+                        Back
+                    </strong>
+                </button>
+
                 <div className="flex flex-col md:flex-row">
                     {/* Left side with Image */}
                     <div className="p-4 md:w-1/3">
                         <img src={book?.image} alt={book?.title}
-                             className="mx-auto h-fit w-fit rounded shadow-md min-h-[300px] min-w-[200px]"/>
+                             className="mx-auto h-fit w-fit rounded shadow-md min-h-[300px] min-w-[200px]
+                                         transition-transform duration-300 text-al hover:scale-105"/>
                     </div>
 
                     {/* Right side with Details */}
                     <div className="p-4 md:w-2/3">
+
+
                         <h1 className="mb-2 text-3xl font-bold text-cyan-700">{book?.title}</h1>
                         {book?.subtitle &&
                             <h2 className="mb-4 text-xl text-stone-600">{book?.subtitle}</h2>}
-                        <p className="mt-4 mb-2 text-stone-600">
-                            <strong>Authors:</strong> {book?.authors.join(", ")}</p>
+                        {book?.authors && book.authors.length > 0 &&
+                            <p className="mt-4 mb-2 text-stone-600">
+                                <strong>Authors:</strong> {book?.authors?.join(", ")}</p>}
                         <p className="mb-2 text-stone-600"><strong>Publisher:</strong> {book?.publisher}</p>
                         <p className="mb-2 text-stone-600"><strong>Published
                             Year:</strong> {book?.publishedYear}</p>

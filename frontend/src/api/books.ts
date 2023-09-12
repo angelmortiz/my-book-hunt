@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from 'axios';
 import {BookPreviewFullResponse} from "@/types/books_preview";
 import {BookFullResponse} from "@/types/books_full_info";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_ADDRESS + '/v1/books';
+const BASE_URL = (process.env.NEXT_PUBLIC_SERVER_ADDRESS || "http://127.0.0.1:80") + '/v1/books';
 
 export const searchBooks = async (query: string, startIndex: number = 0): Promise<BookPreviewFullResponse> => {
     try {
