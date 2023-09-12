@@ -25,7 +25,7 @@ cd backend
 
 Create a virtual environment using:
 ```
-python -m venv venv
+python3 -m venv venv
 ```
 
 Activate the virtual environment:
@@ -42,9 +42,30 @@ Install the required dependencies:
 ```
 pip install -r requirements.txt
 ```
+
+Deactivate and re-activate the virtual environment:
+```
+deactivate
+```
+On macOS and Linux:
+then
+```
+source venv/bin/activate
+```
+On Windows:
+```
+.\venv\Scripts\activate
+```
+
 Run the development server:
 ```
 uvicorn app.main:app --host 0.0.0.0 --port 80 --reload
+```
+
+Backend should be now reachable at:
+```
+http://localhost:80
+Swagger UI: http://localhost:80/docs
 ```
 ### Backend alternative using Docker
 >Ensure you have Docker installed and running. Then simply bring up the service:
@@ -70,7 +91,10 @@ Start the development server:
 ```
 npm run dev
 ```
-
+Frontend should be now reachable at:
+```
+http://localhost:3000
+```
 ## Current deployment
 
 ### Frontend (Next.js on AWS Amplify)
@@ -81,8 +105,8 @@ The frontend application was deployed using AWS Amplify. AWS Amplify makes it ea
 ### Backend (FastAPI on AWS ECS Fargate)
 The backend API for "My Book Hunt" was deployed using AWS's Elastic Container Service (ECS) with the Fargate launch type. This allows for serverless container execution, ensuring seamless scalability and management.
 
->API Base URL: [api.mybookhunt.com](https://api.mybookhunt.com)
-
+>API Base URL: [api.mybookhunt.com](https://api.mybookhunt.com)\
+>API Documentation (Swagger UI): [api.mybookhunt.com/docs](https://api.mybookhunt.com/docs)
 
 ## Conclusion
 Building this application was a comprehensive journey of integrating frontend and backend technologies to create a seamless book searching experience. Any feedback, contributions, or insights into refining "My Book Hunt" are always appreciated.
